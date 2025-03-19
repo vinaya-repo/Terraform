@@ -39,4 +39,6 @@ jobs:
         run: terraform apply -auto-approve
 
       - name: Output bucket name
-        run: echo "Bucket name: $(terraform output s3_bucket_name)"
+        run: |
+          BUCKET_NAME=$(terraform output -raw s3_bucket_name)
+          echo "Bucket name: $BUCKET_NAME"
