@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "my_bucket" {
-  bucket = "test-bucket"  # Change to a globally unique name
+  bucket = "test-bucket-2"  # Change to a globally unique name
   acl    = "private"
 
   tags = {
