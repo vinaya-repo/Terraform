@@ -1,17 +1,17 @@
-name: Deploy S3 Bucket with Terraform
+name: Deploy Terraform Infrastructure
 
 on:
   push:
     branches:
-      - main  # Trigger on push to the main branch
+      - main  # Trigger on push to main branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     permissions:
-      id-token: write   # Required for OIDC authentication
-      contents: read    # Required to read repository content
+      id-token: write
+      contents: read
 
     steps:
       - name: Checkout code
@@ -25,9 +25,8 @@ jobs:
       - name: Configure AWS Credentials using OIDC
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GitHub-Terraform-Role  # Use secret for account ID
-          role-session-name: GitHubTerraformSession
-          aws-region: us-east-1  # Replace with your AWS region
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GitHub-Terraform-Role
+          aws-region: us-east-1
 
       - name: Initialize Terraform
         run: terraform init
@@ -37,8 +36,3 @@ jobs:
 
       - name: Apply Terraform
         run: terraform apply -auto-approve
-
-      - name: Output bucket name
-        run: |
-          BUCKET_NAME=$(terraform output -raw s3_bucket_name)
-          echo "Bucket name: $BUCKET_NAME"
