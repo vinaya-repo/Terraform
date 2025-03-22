@@ -27,7 +27,7 @@ resource "aws_s3_bucket" "backend_bucket" {
  }
  
  output "s3_bucket_name" {
-   value = aws_s3_bucket.my_bucket.bucket
+   value = aws_s3_bucket.backend_bucket.bucket
  }
 
 resource "aws_dynamodb_table" "terraform_locks" {
