@@ -1,7 +1,11 @@
-name: Destroy Terraform Infrastructure
+name: Destroy Specific Terraform Resources
 
 on:
-  workflow_dispatch:  # Allows manual trigger for destruction
+  workflow_dispatch:
+    inputs:
+      resources:
+        description: "Comma-separated list of Terraform resources to destroy (e.g., aws_instance.example,aws_s3_bucket.mybucket)"
+        required: true
 
 jobs:
   destroy:
@@ -29,8 +33,14 @@ jobs:
       - name: Initialize Terraform
         run: terraform init
 
+      - name: Parse Resources for Destruction
+        id: parse_resources
+        run: |
+          RESOURCES_LIST=$(echo "${{ github.event.inputs.resources }}" | sed 's/,/ -target=/g')
+          echo "TARGETS=-target=${RESOURCES_LIST}" >> $GITHUB_ENV
+
       - name: Plan Terraform Destroy
-        run: terraform plan -destroy -out=tfplan
+        run: terraform plan -destroy ${{ env.TARGETS }} -out=tfplan
 
       - name: Apply Terraform Destroy
         run: terraform apply -auto-approve tfplan
