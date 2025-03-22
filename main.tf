@@ -2,7 +2,7 @@ provider "aws" {
    region = "us-east-1"  # Replace with your AWS region
  }
  
-resource "aws_s3_bucket" "my_bucket" {
+resource "aws_s3_bucket" "example" {
    bucket = "s3-test-bucket-terraform"  # Replace with a unique bucket name
  
    tags = {
