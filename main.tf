@@ -4,6 +4,7 @@ provider "aws" {
  
 resource "aws_s3_bucket" "my_bucket" {
    bucket = "s3-backend-terraform"  # Replace with a unique bucket name
+   acl    = "private"
  
    tags = {
      Name        = "My Terraform S3 Bucket"
