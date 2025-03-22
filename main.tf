@@ -3,7 +3,7 @@ provider "aws" {
  }
  
 resource "aws_s3_bucket" "example" {
-   bucket = "s3-test-bucket-terraform"  # Replace with a unique bucket name
+   bucket = "test-bucket-terraform"  # Replace with a unique bucket name
  
    tags = {
      Name        = "My Terraform S3 Bucket"
