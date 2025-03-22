@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "example" {
  }
  
  output "s3_bucket_name" {
-   value = aws_s3_bucket.my_bucket.bucket
+   value = aws_s3_bucket.example.bucket
  }
 
 # resource "aws_dynamodb_table" "terraform_locks" {
