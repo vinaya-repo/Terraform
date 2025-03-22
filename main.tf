@@ -3,6 +3,20 @@ provider "aws" {
  }
  
  resource "aws_s3_bucket" "my_bucket" {
+   bucket = "temp-bucket-terraform"  # Replace with a unique bucket name
+   acl    = "private"
+ 
+   tags = {
+     Name        = "My Terraform S3 Bucket"
+     Environment = "Dev"
+   }
+ }
+ 
+ output "s3_bucket_name" {
+   value = aws_s3_bucket.my_bucket.bucket
+ }
+
+resource "aws_s3_bucket" "backend_bucket" {
    bucket = "s3-backend"  # Replace with a unique bucket name
    acl    = "private"
  
