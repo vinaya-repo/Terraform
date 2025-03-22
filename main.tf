@@ -17,7 +17,7 @@ provider "aws" {
 #  }
 
 resource "aws_s3_bucket" "backend_bucket" {
-   bucket = "s3-backend"  # Replace with a unique bucket name
+   bucket = "s3-backend-terraform"  # Replace with a unique bucket name
    acl    = "private"
  
    tags = {
